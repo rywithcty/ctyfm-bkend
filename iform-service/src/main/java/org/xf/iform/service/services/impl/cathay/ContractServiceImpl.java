@@ -250,7 +250,7 @@ public class ContractServiceImpl implements ContractService {
      */
     @Override
     public List<ContractItemExes> getContractItemExes(Integer ctId, Integer ctiId, Integer cieId) {
-        if (ctId == null && ctId == null && cieId == null) {
+        if (ctId == null && ctiId == null && cieId == null) {
             throw new CustomException("必須輸入條件");
         }
         boolean filterYn = false;

@@ -58,8 +58,9 @@ public class TemplateController {
     }
     @PutMapping("/template")
     @Operation(summary = "更新樣板")
-    public ResponseEntity<?> editTemplate(@RequestBody TemplateEntity templateEntity) {
+    public ResponseEntity<?> editTemplate(@RequestBody TemplateDto templateDto) {
 
+        TemplateEntity templateEntity = TemplateMapper.INSTANCE.toEntity(templateDto);
         log.info("templateEdit:=" + templateEntity.toString());
         templateService.editTemplate(templateEntity);
         BaseResponse<String> respDto = new BaseResponse<>();
