@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xf.iform.core.common.BaseResponse;
+import org.xf.iform.core.dto.cathay.PersonnelDto;
 import org.xf.iform.core.entity.cathay.PersonnelEntity;
+import org.xf.iform.service.data.mapper.cathay.PersonnelMapper;
 import org.xf.iform.service.services.cathay.PersonnelService;
 
 import java.util.List;
@@ -50,7 +52,8 @@ public class PersonnelController {
 
     @PostMapping("/personnel")
     @Operation(summary = "新增人員")
-    public ResponseEntity<?> addPersonnel(@RequestBody PersonnelEntity personnelEntity) {
+    public ResponseEntity<?> addPersonnel(@RequestBody PersonnelDto personnelDto) {
+        PersonnelEntity personnelEntity = PersonnelMapper.INSTANCE.toEntity(personnelDto);
 
         log.info("personnelAdd:=" + personnelEntity.toString());
 
@@ -61,7 +64,8 @@ public class PersonnelController {
     }
     @PutMapping("/personnel")
     @Operation(summary = "更新人員")
-    public ResponseEntity<?> editPersonnel(@RequestBody PersonnelEntity personnelEntity) {
+    public ResponseEntity<?> editPersonnel(@RequestBody PersonnelDto personnelDto) {
+        PersonnelEntity personnelEntity = PersonnelMapper.INSTANCE.toEntity(personnelDto);
 
         log.info("personnelEdit:=" + personnelEntity.toString());
         personnelService.editPersonnel(personnelEntity);

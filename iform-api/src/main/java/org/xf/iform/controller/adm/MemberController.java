@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xf.iform.core.common.BaseResponse;
+import org.xf.iform.core.dto.contract.MemberAddDto;
 import org.xf.iform.core.dto.contract.MemberDto;
-import org.xf.iform.core.entity.cathay.MemberEntity;
+import org.xf.iform.service.data.mapper.contract.MemberMapper;
 import org.xf.iform.service.services.contract.MemberService;
 
 import javax.validation.Valid;
@@ -47,11 +48,11 @@ public class MemberController {
 
     @PostMapping("/member/add")
     @Operation(summary = "新增文件成員")
-    public ResponseEntity<?> addMember(@RequestBody MemberEntity memberEntity) {
-
-        log.info("memberAdd:=" + memberEntity.toString());
+    public ResponseEntity<?> addMember(@RequestBody MemberAddDto memberAddDto) {
+        log.info("memberAdd:=" + memberAddDto.toString());
         BaseResponse<MemberDto> respDto = new BaseResponse<>();
-        respDto.setData(memberService.addMember(memberEntity));
+        respDto.setData(memberService.addMember(
+                MemberMapper.INSTANCE.addToEntity(memberAddDto)));
 
         return ResponseEntity.ok(respDto);
     }

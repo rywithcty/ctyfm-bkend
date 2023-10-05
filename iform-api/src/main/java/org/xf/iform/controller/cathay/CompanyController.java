@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xf.iform.core.common.BaseResponse;
+import org.xf.iform.core.dto.cathay.CompanyDto;
 import org.xf.iform.core.entity.cathay.CompanyEntity;
+import org.xf.iform.service.data.mapper.cathay.CompanyMapper;
 import org.xf.iform.service.services.cathay.CompanyService;
-import org.xf.iform.service.services.cathay.WorkService;
 
 import java.util.List;
 
@@ -47,8 +48,8 @@ public class CompanyController {
 
     @PostMapping("/company")
     @Operation(summary = "新增公司")
-    public ResponseEntity<?> addCompany(@RequestBody CompanyEntity companyEntity) {
-
+    public ResponseEntity<?> addCompany(@RequestBody CompanyDto companyDto) {
+        CompanyEntity companyEntity = CompanyMapper.INSTANCE.toEntity(companyDto);
         log.info("addCompany:=" + companyEntity.toString());
 
         BaseResponse<Integer> respDto = new BaseResponse<>();
@@ -58,8 +59,8 @@ public class CompanyController {
     }
     @PutMapping("/company")
     @Operation(summary = "更新公司")
-    public ResponseEntity<?> editCompany(@RequestBody CompanyEntity companyEntity) {
-
+    public ResponseEntity<?> editCompany(@RequestBody CompanyDto companyDto) {
+        CompanyEntity companyEntity = CompanyMapper.INSTANCE.toEntity(companyDto);
         log.info("editCompany:=" + companyEntity.toString());
         companyService.editCompany(companyEntity);
         BaseResponse<String> respDto = new BaseResponse<>();

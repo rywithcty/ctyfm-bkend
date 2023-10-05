@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xf.iform.core.common.BaseResponse;
+import org.xf.iform.core.dto.cathay.DistributionDto;
 import org.xf.iform.core.entity.cathay.DistributionEntity;
+import org.xf.iform.service.data.mapper.cathay.DistributionMapper;
 import org.xf.iform.service.services.cathay.DistributionService;
 
 import java.util.List;
@@ -47,8 +49,8 @@ public class DistributionController {
 
     @PostMapping("/distribution")
     @Operation(summary = "新增分類原則")
-    public ResponseEntity<?> addDistribution(@RequestBody DistributionEntity distributionEntity) {
-
+    public ResponseEntity<?> addDistribution(@RequestBody DistributionDto distributionDto) {
+        DistributionEntity distributionEntity = DistributionMapper.INSTANCE.toEntity(distributionDto);
         log.info("distributionAdd:=" + distributionEntity.toString());
 
         BaseResponse<Integer> respDto = new BaseResponse<>();
@@ -58,7 +60,8 @@ public class DistributionController {
     }
     @PutMapping("/distribution")
     @Operation(summary = "更新分類原則")
-    public ResponseEntity<?> editDistribution(@RequestBody DistributionEntity distributionEntity) {
+    public ResponseEntity<?> editDistribution(@RequestBody DistributionDto distributionDto) {
+        DistributionEntity distributionEntity = DistributionMapper.INSTANCE.toEntity(distributionDto);
 
         log.info("distributionEdit:=" + distributionEntity.toString());
         distributionService.editDistribution(distributionEntity);

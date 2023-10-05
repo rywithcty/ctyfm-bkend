@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xf.iform.core.common.BaseResponse;
+import org.xf.iform.core.dto.cathay.CategoryDto;
 import org.xf.iform.core.entity.cathay.CategoryEntity;
+import org.xf.iform.service.data.mapper.cathay.CategroyMapper;
 import org.xf.iform.service.services.cathay.CategoryService;
 
 import java.util.List;
@@ -46,8 +48,8 @@ public class CategoryController {
 
     @PostMapping("/category")
     @Operation(summary = "新增category")
-    public ResponseEntity<?> addCategory(@RequestBody CategoryEntity categoryEntity) {
-
+    public ResponseEntity<?> addCategory(@RequestBody CategoryDto categoryDto) {
+        CategoryEntity categoryEntity = CategroyMapper.INSTANCE.toEntity(categoryDto);
         log.info("categoryAdd:=" + categoryEntity.toString());
 
         BaseResponse<Integer> respDto = new BaseResponse<>();
@@ -57,8 +59,9 @@ public class CategoryController {
     }
     @PutMapping("/category")
     @Operation(summary = "更新category")
-    public ResponseEntity<?> editCategory(@RequestBody CategoryEntity categoryEntity) {
+    public ResponseEntity<?> editCategory(@RequestBody CategoryDto categoryDto) {
 
+        CategoryEntity categoryEntity = CategroyMapper.INSTANCE.toEntity(categoryDto);
         log.info("categoryEdit:=" + categoryEntity.toString());
         categoryService.editCategory(categoryEntity);
         BaseResponse<String> respDto = new BaseResponse<>();

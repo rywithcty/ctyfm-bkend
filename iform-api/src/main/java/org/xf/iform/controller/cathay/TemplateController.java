@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xf.iform.core.common.BaseResponse;
+import org.xf.iform.core.dto.cathay.TemplateDto;
 import org.xf.iform.core.entity.cathay.TemplateEntity;
+import org.xf.iform.service.data.mapper.cathay.TemplateMapper;
 import org.xf.iform.service.services.cathay.TemplateService;
 
 import java.util.List;
@@ -45,8 +47,8 @@ public class TemplateController {
 
     @PostMapping("/template")
     @Operation(summary = "新增樣板")
-    public ResponseEntity<?> addTemplate(@RequestBody TemplateEntity templateEntity) {
-
+    public ResponseEntity<?> addTemplate(@RequestBody TemplateDto templateDto) {
+        TemplateEntity templateEntity = TemplateMapper.INSTANCE.toEntity(templateDto);
         log.info("templateAdd:=" + templateEntity.toString());
 
         BaseResponse<Integer> respDto = new BaseResponse<>();

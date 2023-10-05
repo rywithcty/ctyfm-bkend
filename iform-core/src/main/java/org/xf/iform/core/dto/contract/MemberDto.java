@@ -22,7 +22,6 @@ public class MemberDto {
     /**
      * mb_id
      */
-    @NotNull(message = "mbId不可為空")
     private Integer mbId;
 
     /**
@@ -64,7 +63,6 @@ public class MemberDto {
      * 承辦人簽核時間
      */
     @JsonFormat(locale = "zh_tw", timezone = "GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date mbLv0Time;
 
     /**
@@ -81,7 +79,6 @@ public class MemberDto {
      * 上級簽核時間
      */
     @JsonFormat(locale = "zh_tw", timezone = "GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date mbLv1Time;
 
     /**
@@ -98,7 +95,6 @@ public class MemberDto {
      * 高層簽核時間
      */
     @JsonFormat(locale = "zh_tw", timezone = "GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date mbLv2Time;
 
     /**

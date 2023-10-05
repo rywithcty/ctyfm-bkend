@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xf.iform.core.common.BaseResponse;
+import org.xf.iform.core.dto.cathay.SourceDto;
 import org.xf.iform.core.entity.cathay.SourceEntity;
-import org.xf.iform.service.services.cathay.SourceService;
+import org.xf.iform.service.data.mapper.cathay.SourceMapper;
 import org.xf.iform.service.services.cathay.SourceService;
 
 import java.util.List;
@@ -45,8 +46,8 @@ public class SourceController {
 
     @PostMapping("/source")
     @Operation(summary = "新增來源")
-    public ResponseEntity<?> addSource(@RequestBody SourceEntity sourceEntity) {
-
+    public ResponseEntity<?> addSource(@RequestBody SourceDto sourceDto) {
+        SourceEntity sourceEntity = SourceMapper.INSTANCE.toEntity(sourceDto);
         log.info("sourceAdd:=" + sourceEntity.toString());
 
         BaseResponse<Integer> respDto = new BaseResponse<>();
@@ -56,7 +57,8 @@ public class SourceController {
     }
     @PutMapping("/source")
     @Operation(summary = "更新來源")
-    public ResponseEntity<?> editSource(@RequestBody SourceEntity sourceEntity) {
+    public ResponseEntity<?> editSource(@RequestBody SourceDto sourceDto) {
+        SourceEntity sourceEntity = SourceMapper.INSTANCE.toEntity(sourceDto);
 
         log.info("sourceEdit:=" + sourceEntity.toString());
         sourceService.editSource(sourceEntity);

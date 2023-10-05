@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xf.iform.core.common.BaseResponse;
+import org.xf.iform.core.dto.cathay.WorkDto;
 import org.xf.iform.core.entity.cathay.WorkEntity;
+import org.xf.iform.service.data.mapper.cathay.WorkMapper;
 import org.xf.iform.service.services.cathay.WorkService;
 import org.xf.iform.service.services.cathay.WorkService;
 
@@ -47,8 +49,8 @@ public class WorkController {
 
     @PostMapping("/work")
     @Operation(summary = "新增work")
-    public ResponseEntity<?> addWork(@RequestBody WorkEntity workEntity) {
-
+    public ResponseEntity<?> addWork(@RequestBody WorkDto workDto) {
+        WorkEntity workEntity = WorkMapper.INSTANCE.toEntity(workDto);
         log.info("workAdd:=" + workEntity.toString());
 
         BaseResponse<Integer> respDto = new BaseResponse<>();
@@ -58,7 +60,8 @@ public class WorkController {
     }
     @PutMapping("/work")
     @Operation(summary = "更新work")
-    public ResponseEntity<?> editWork(@RequestBody WorkEntity workEntity) {
+    public ResponseEntity<?> editWork(@RequestBody WorkDto workDto) {
+        WorkEntity workEntity = WorkMapper.INSTANCE.toEntity(workDto);
 
         log.info("workEdit:=" + workEntity.toString());
         workService.editWork(workEntity);

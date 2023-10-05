@@ -73,10 +73,10 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
 			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 			.and().authorizeRequests()
-			.antMatchers("/**").permitAll()
 			.antMatchers("/api/auth/**").permitAll()
 			.antMatchers("/v1/login/api/**").permitAll()
-			.antMatchers("/swagger-ui/**", "/swagger-resources/**", "/api-docs/**").permitAll().anyRequest()
+			.antMatchers("/swagger-ui/**", "/swagger-resources/**", "/api-docs/**").permitAll()
+			.antMatchers("/**").permitAll().anyRequest()
 			.authenticated();
 		http.authenticationProvider(authenticationProvider());
 //		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
