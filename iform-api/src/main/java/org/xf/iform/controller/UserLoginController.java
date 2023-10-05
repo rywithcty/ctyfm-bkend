@@ -43,7 +43,7 @@ import java.util.*;
 @Slf4j
 @RestController
 @RequestMapping("/v1/login/api")
-public class LoginController {
+public class UserLoginController {
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -215,7 +215,6 @@ public class LoginController {
             // 輸出XML文档
 
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
             log.error("xmlCreate錯誤", e);
             return null;
         }
