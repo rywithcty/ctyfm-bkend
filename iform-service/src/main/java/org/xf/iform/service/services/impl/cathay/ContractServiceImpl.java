@@ -480,7 +480,7 @@ public class ContractServiceImpl implements ContractService {
                     int yearCost;
                     if (y < 3) {
                         yearCost = new BigDecimal(itemExesSubTmp.getCiesCost()).multiply(
-                            new BigDecimal(0.3)).setScale(0, RoundingMode.HALF_UP).intValue();
+                            BigDecimal.valueOf(0.3)).setScale(0, RoundingMode.HALF_UP).intValue();
                         yearCostOver -= yearCost;
                     } else {
                         yearCost = yearCostOver;
