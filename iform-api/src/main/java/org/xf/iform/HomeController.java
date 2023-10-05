@@ -21,7 +21,7 @@ public class HomeController {
     @Value("${spring.profiles.active:}")
     private String profileActive;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String authenticateUser() {
         return profileActive + " - AP is Running!";
     }
@@ -29,7 +29,7 @@ public class HomeController {
     @GetMapping("/home")
     public ResponseEntity<?> anyAccess() {
 	BaseResponse<String> respDto = new BaseResponse<>();
-	respDto.setData("springboot is running");
+	respDto.setData(profileActive + "springboot is running");
 	return ResponseEntity.ok(respDto);
     }
 }
